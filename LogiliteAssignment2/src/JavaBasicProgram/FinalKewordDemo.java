@@ -7,6 +7,7 @@ public class FinalKewordDemo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println("Welcome");
 		FinalKewordDemo fd=new FinalKewordDemo();
 		fd.a=20;
 		//We can not change the final variable value
