@@ -1,4 +1,4 @@
-package InterfaceProgram;
+package InterfaceEx;
 
 public interface NewCarModel {
 	

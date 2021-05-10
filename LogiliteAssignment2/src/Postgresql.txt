@@ -1,0 +1,201 @@
+create DATABASE Logilite;
+
+CREATE TABLE COMPANY(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL
+);
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'omhari', 23, 'pune', 30000);
+insert INTO company VALUES(2,'hariom',23,'latur',50000);
+insert INTO company VALUES(3,'om',25,'mumbai',20000);
+insert INTO company VALUES(4,'hari',30,'satara',80000);
+insert INTO company VALUES(5,'ram',35,'gujrat',60000);
+insert INTO company VALUES(6,'deepak',50,'pune',100000);
+insert INTO company VALUES(7,'vaibhav',23,'nagpur',25000);
+insert INTO company VALUES(8,'karan',43,'aurangabad',70000);
+insert INTO company VALUES(9,'ramhari',25,'latur',50000);
+
+
+select * from company;
+
+UPDATE COMPANY SET SALARY = 35000 WHERE ID = 3;
+
+DELETE FROM COMPANY WHERE ID = 2;
+
+SELECT * FROM COMPANY WHERE name  LIKE 'o%';
+SELECT * FROM COMPANY WHERE name  LIKE '%om%';
+SELECT * FROM COMPANY WHERE name  LIKE '__m%';
+SELECT * FROM COMPANY WHERE name  LIKE '_m%';
+
+
+SELECT * FROM COMPANY LIMIT 4;
+SELECT * FROM COMPANY LIMIT 3 OFFSET 2;
+SELECT * FROM COMPANY LIMIT 5;
+
+
+SELECT * FROM COMPANY ORDER BY AGE ASC; 
+SELECT * FROM COMPANY ORDER BY NAME, SALARY ASC;
+SELECT * FROM COMPANY ORDER BY NAME DESC;
+
+
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME;
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME DESC;
+
+
+SELECT NAME FROM COMPANY GROUP BY name HAVING count(name) < 2;
+SELECT NAME FROM COMPANY GROUP BY name HAVING count(name) > 1;
+
+
+select salary from company;
+update company set salary=25000 where id=8;
+select distinct salary from company;
+
+
+SELECT *
+FROM company
+WHERE id BETWEEN 4 AND 7;
+
+
+SELECT *
+FROM company
+WHERE id NOT BETWEEN 4 AND 7;
+
+
+SELECT *
+FROM company
+WHERE id IN (1,5,8);
+
+
+SELECT *
+FROM company
+WHERE id IN (1,5,8);
+
+
+SELECT *
+FROM company
+WHERE id NOT IN (3,7,9);
+
+
+SELECT *
+FROM company
+WHERE name IN ('karan', 'ram', 'deepak');
+
+
+SELECT *
+FROM company
+WHERE name NOT IN ('karan', 'ram', 'deepak');
+
+
+ALTER TABLE company
+  ADD date DATE;
+ 
+ 
+select * from company;  
+
+
+ALTER TABLE company
+  RENAME COLUMN name TO Emp_name;
+
+select * from company;  
+
+
+select * from company;  
+
+create table user1(User_id int,User_name char(30));
+
+alter TABLE user1 add primary key(User_id);
+
+CREATE TABLE Training_details(user_training_id int PRIMARY KEY,
+					          user_id int REFERENCES USER1(USER_id),
+							  training_id int,
+							  training_date date NOT NULL
+							   );
+
+							   
+INSERT INTO user1 values(1,'John Doe');
+INSERT INTO user1 values(2,'Jone Don');
+INSERT INTO user1 values(3,'Alice Jones');
+INSERT INTO user1 values(4,'Lisa Remero');
+
+SELECT * from user1;
+
+INSERT INTO training_details VALUES(1,1,1,'2015-08-02');
+INSERT INTO training_details VALUES(2,2,1,'2015-08-03');
+INSERT INTO training_details VALUES(3,3,2,'2015-08-02');
+INSERT INTO training_details VALUES(4,4,2,'2015-08-04');
+INSERT INTO training_details VALUES(5,2,2,'2015-08-03');
+INSERT INTO training_details VALUES(6,1,1,'2015-08-02');
+INSERT INTO training_details VALUES(7,3,2,'2015-08-04');
+INSERT INTO training_details VALUES(8,4,3,'2015-08-03');
+INSERT INTO training_details VALUES(9,1,4,'2015-08-03');
+INSERT INTO training_details VALUES(10,3,1,'2015-08-02');
+INSERT INTO training_details VALUES(11,4,2,'2015-08-04');
+INSERT INTO training_details VALUES(12,3,2,'2015-08-02');
+INSERT INTO training_details VALUES(13,1,1,'2015-08-02');
+INSERT INTO training_details VALUES(14,4,3,'2015-08-03');
+
+SELECT * from training_details;
+
+
+SELECT * from user1 INNER JOIN training_details
+ON user1.user_id = training_details.user_id;
+
+SELECT * from user1 Full OUTER JOIN training_details
+ON user1.user_id = training_details.user_id;
+
+SELECT * from user1 LEFT JOIN training_details
+ON user1.user_id = training_details.user_id;
+
+SELECT * from user1 RIGHT JOIN training_details
+ON user1.user_id = training_details.user_id;
+
+
+SELECT * FROM company;
+
+SELECT max(salary)FROM company;
+SELECT min(salary)FROM company;
+SELECT sum(salary)FROM company;
+SELECT avg(salary)FROM company;
+SELECT count(salary)FROM company;
+
+
+SELECT count (DISTINCT salary)FROM company;
+SELECT count (DISTINCT address)FROM company;
+SELECT sum (DISTINCT salary)FROM company;
+SELECT max (DISTINCT salary)FROM company;
+
+
+select lower('R2OMlSCHOGJKLFOLS');
+select Upper('R2SCHOfojndibnmxLS');
+select character_length('OmhariShinde');
+select position('w' in 'welcome to Pune');
+select ascii('A');
+select concat('Welcome to ','Pune');
+select trim('          Welcome to Pune    ');
+select ltrim('          Welcome to Pune');
+select rtrim('Welcome to Pune    ');
+select initcap('welcome to pune');
+select reverse('OMHARI');
+select replace('abcdefcdghxxifjk','cd','xx');
+select repeat('PostgreSQL',2);
+select substr('PostgreSQL is open source db',8,3);
+
+
+select * from company;
+CREATE VIEW Myview AS SELECT * FROM company where emp_name='omhari';
+
+
+drop view myview;
+
+
+select * from company where emp_name like 'o%' or address='pune';
+select * from company where emp_name like 'o%' and address='pune';
+select * from company where not id=5;
+
+
+CREATE USER om WITH PASSWORD 'system';
+GRANT ALL ON COMPANY TO om;
+REVOKE ALL ON COMPANY FROM om;
